@@ -1,0 +1,44 @@
+12406297  01 Naranjas de jugo                 54   1526.28 gramos     2 20 3 10 5 10 1 25 7 15 6 25 2 10
+34567891  01 Manzanas verdes                  15   1320.00 gramos     3 10 4 20 1 25 2 10 5 10 6 15 7 20
+23456789  02 Leche Cindor                   2451    630.86 cc         1  5 4 15 3 20 4 10 6 25 2 15 7 15
+74519320  02 Fanta 2.25                      153      2.25 litros     5 15 3 20 5 20 4 15 2 20 6 25 3 10
+10203040  03 Yogur Ser                        87    950.75 cc         2 10 3 10 4 15 1 20 6 25 2 15 7 20
+11223344  03 Yogur Light                      33    815.00 cc         0  0  0  0  0  0  0  0  0  0  0  0 0 0
+22114433  04 Pan Lactal Fargo                230    535.99 gramos     1  5 3 10 6 20 2 15 5 15 4 15 7 25
+99887766  05 Harina 000                       90    324.10 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+55667788  06 Arroz largo fino                100    420.00 gramos     2 10 3 10 4 10 5 10 6 10 7 10 1 10
+77889900  06 Fideos tirabuzón                140    320.20 gramos     3 15 2 15 1 20 4 10 5 10 6 10 7 10
+11335577  07 Aceite de girasol               300   1200.50 cc         0  0  0  0  0  0  0  0  0  0  0  0 0 0
+22334455  08 Huevos x12                       72    980.00 unidades   1 10 2 10 3 10 4 10 5 10 6 10 7 10
+99882233  09 Queso cremoso                    25    630.30 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+88776655  10 Sal fina                         90     85.90 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+33221100  11 Azúcar común                    120    215.60 gramos     2  5 3 10 1 15 4 20 5 10 6 10 7 20
+12121212  12 Mayonesa                         45    380.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+56565656  13 Salsa de tomate                  67    310.10 gramos     3 20 4 10 5 10 6 10 7 10 2 10 1 10
+23232323  14 Agua mineral                     87      1.00 litros     1  5 3 10 4 10 2 15 6 10 7 15 5 10
+43434343  15 Galletitas dulces                35    295.30 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+44445555  01 Banana Ecuador                   56   1180.75 gramos     2 10 3 15 5 20 1 10 6 10 7 15 4 15
+99887755  02 Coca-Cola 2.25                   64      2.25 litros     3 10 4 15 1 20 2 10 5 10 6 10 7 15
+88889999  03 Leche Descremada                 23    615.50 cc         0  0  0  0  0  0  0  0  0  0  0  0 0 0
+11220011  04 Pan Integral Fargo               45    550.00 gramos     1 15 2 10 4 10 6 15 7 10 5 15 3 10
+77884455  05 Harina Integral                  18    310.25 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+88990077  06 Fideos Spaghetti                 67    325.90 gramos     2 10 3 15 5 15 1 10 6 10 7 10 4 10
+33004411  07 Aceite de oliva extra            38   1100.00 cc         0  0  0  0  0  0  0  0  0  0  0  0 0 0
+99001122  08 Huevos Orgánicos x6              12    500.00 unidades   2 15 3 10 4 10 5 10 6 10 7 15 1 10
+77889911  09 Queso rallado                    21    100.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+77001122  10 Pimienta molida                  14     65.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+22003344  11 Azúcar mascabo                   66    225.50 gramos     1 10 2 10 3 10 4 10 5 10 6 10 7 10
+12344321  12 Mostaza                           9    250.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+44447777  13 Puré de tomate                   48    310.00 gramos     1 15 3 10 4 10 2 10 6 10 5 10 7 10
+66669999  14 Agua con gas                      3      1.50 litros     2 20 3 15 5 10 6 15 4 10 1 10 7 15
+22332211  15 Galletitas saladas               80    310.10 gramos     1 10 2 10 3 10 4 10 5 10 6 10 7 10
+10020030  01 Pera Williams                    25   1200.00 gramos     2 10 3 15 4 20 1 10 5 10 6 10 7 15
+34563210  02 Sprite 2.25                       0      2.2 litros     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+90001111  03 Yogur bebible                    74    780.00 cc         1 10 2 10 3 10 4 10 5 10 6 10 7 10
+31007788  04 Pan de campo                     39    690.00 gramos     1 10 2 10 3 10 4 10 5 10 6 10 7 10
+12004567  05 Harina leudante                  55    330.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+44667788  06 Ravioles de ricota               22    500.00 gramos     2 15 3 15 4 10 5 10 1 10 6 10 7 10
+55998877  07 Aceite de maíz                   10   1150.00 cc         0  0  0  0  0  0  0  0  0  0  0  0 0 0
+33445566  08 Huevos x6                        50    500.00 unidades   1 15 2 10 3 10 4 10 5 10 6 10 7 10
+22998877  09 Queso reggianito                 11    550.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0
+00000001  10 Sal gruesa                       47     90.00 gramos     0  0  0  0  0  0  0  0  0  0  0  0 0 0

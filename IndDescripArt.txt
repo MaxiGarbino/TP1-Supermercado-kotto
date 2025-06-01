@@ -1,0 +1,41 @@
+Aceite de girasol               10 1
+Aceite de maíz                 40 0
+Aceite de oliva extra          25 0
+Agua con gas                   32 1
+Agua mineral                   17 1
+Azúcar común                   14 1
+Azúcar mascabo                 29 1
+Banana Ecuador                 19 1
+Coca-Cola 2.25                 20 1
+Fanta 2.25                     3  1
+Fideos Spaghetti               24 1
+Fideos tirabuzón               9 1
+Harina 000                     7  0
+Harina Integral                23 0
+Harina leudante               38 0
+Huevos Orgánicos x6           26 1
+Huevos x12                   11 1
+Huevos x6                    41 1
+Leche Cindor                   2  1
+Leche Descremada              21 0
+Manzanas verdes                1  1
+Mayonesa                     15 0
+Mostaza                      30 0
+Naranjas de jugo               0  1
+Pera Williams                34 1
+Pan Integral Fargo            22 1
+Pan Lactal Fargo              7  1
+Pan de campo                 37 1
+Pimienta molida              28 0
+Puré de tomate               31 1
+Queso cremoso                12 0
+Queso rallado                27 0
+Queso reggianito             09 0
+Ravioles de ricota           39 1
+Sal fina                    13 0
+Sal gruesa                  43 0
+Salsa de tomate             16 1
+Sprite 2.25                 35 0
+Yogur Light                 5  0
+Yogur Ser                   4  1
+Yogur bebible               36 1

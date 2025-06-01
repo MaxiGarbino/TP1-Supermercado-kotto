@@ -1,0 +1,15 @@
+01 Frutas
+02 Bebidas
+03 Lácteos
+04 Panificados
+05 Harinas
+06 Pastas
+07 Aceites
+08 Huevos
+09 Quesos
+10 Condimentos
+11 Azúcar
+12 Salsas
+13 Enlatados
+14 Aguas
+15 Galletitas
