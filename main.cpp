@@ -40,11 +40,12 @@ struct ListaCompras {
 
 void EmitirUnArray(int id[],int n);
 
-bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[]);
+bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[],int &nArticulos, int &nDescripArt, int &nRubros, int &nListaCompras);
 bool LeerArticulos(ifstream &arch, Articulo &articulo);
 bool LeerRubros(ifstream &arch, Rubro &rubro);
 bool LeerListaCompras(ifstream &arch, ListaCompras &compra);
 bool LeerDescripArts(ifstream &arch, DescripArt &desc);
+void ProcCompras(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras);
 
 int main()   
 {   
@@ -57,10 +58,10 @@ int main()
       int nRubros = 0;
       int nListaCompras = 0;
       
-      Abrir (Articulos,IndDescripArt,Rubros,ListaCompras);
+      Abrir (Articulos,IndDescripArt,Rubros,ListaCompras,nArticulos,nDescripArt,nRubros,nListaCompras);
 
     //   VolcarArchivos(/*lista de parámetros que correspondan*/); // indicados por el grupo de trabajo.
-    ProcCompras(ListaCompras,IndDescripArt);              
+    ProcCompras(ListaCompras,IndDescripArt,Articulos, nArticulos, nDescripArt, nRubros, nListaCompras);              
     //   EmitirTicket(/*lista de parámetros que correspondan*/);
     //   EmitirArt_x_Rubro(/*lista de parámetros que correspondan*/);
     //   Cerrar (/*Articulos,IndDescripArt,Rubros,ListaCompras*/);
@@ -76,7 +77,7 @@ void EmitirUnArray(int id[], int n) {
 
 
 
-bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[]) {
+bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[], int &nArticulos, int &nDescripArt, int &nRubros, int &nListaCompras) {
     ifstream archArticulos("../Articulos.txt");
     ifstream archIndDescripArt("../IndDescripArt.txt");
     ifstream archRubros("../Rubros.txt");
@@ -103,21 +104,23 @@ bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], List
     while (LeerArticulos(archArticulos, Articulo[i])) {
 
     i++;
-}
+    }
+    nArticulos = i;
     i = 0;
     while (LeerDescripArts(archIndDescripArt, IndDescripArt[i])) {
         i++;
     }
-
+    nDescripArt = i;
     i = 0;
     while (LeerRubros(archRubros, Rubros[i])) {
         i++;
     }
-
+    nRubros = i;
     i = 0;
     while (LeerListaCompras(archListaCompras, ListaCompras[i])) {
         i++;
     }
+    nListaCompras = i;
     return true;
 }
 
@@ -125,10 +128,38 @@ void VolcarArchivos(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubro
     
  }
 
- void ProcCompras(ListaCompras ListaCompras[], DescripArt IndDescripArt[]) {
-     for (int i = 0; i < sizeof(IndDescripArt) / sizeof(IndDescripArt[0]); i++)
+ void ProcCompras(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras) {
+     for (int i = 0; i < nListaCompras; i++)
      {
-      /* code */
+      int j = 0;
+        while (ListaCompras[i].descripcionArt != IndDescripArt[j].descripcionArt) {
+        j++;
+      }
+      if(IndDescripArt[j].estado) {
+        int stockViejo = Articulos[IndDescripArt[j].posicionArt].stockActual;
+        if (Articulos[IndDescripArt[j].posicionArt].stockActual >= ListaCompras[i].cantRequerida) {
+            Articulos[IndDescripArt[j].posicionArt].stockActual -= ListaCompras[i].cantRequerida;
+        } 
+        else {
+            ListaCompras[i].cantRequerida = Articulos[IndDescripArt[j].posicionArt].stockActual;
+            Articulos[IndDescripArt[j].posicionArt].stockActual = 0;
+        }
+        ifstream archivoEntrada("Articulos.txt");
+        ofstream archivoTemporal("Temporal.txt");
+        if (!archivoEntrada || !archivoTemporal) {
+            cout << "No se pudo abrir el archivo.\n";
+        }
+        string linea;
+        while (getline(archivoEntrada, linea)) {
+        
+        if (linea.find(Articulos[IndDescripArt[j].posicionArt].codArt) != string::npos) {
+            linea.replace(linea.find(to_string(stockViejo)),to_string(stockViejo).length() , to_string(Articulos[IndDescripArt[j].posicionArt].stockActual));
+        }
+    }
+      } 
+      else {
+        ListaCompras[i].cantRequerida = 0;
+      }
      }
      
  }
