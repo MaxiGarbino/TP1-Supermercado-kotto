@@ -52,7 +52,7 @@ bool LeerArticulos(ifstream &arch, Articulo &articulo);
 bool LeerRubros(ifstream &arch, Rubro &rubro);
 bool LeerListaCompras(ifstream &arch, ListaCompras &compra);
 bool LeerDescripArts(ifstream &arch, DescripArt &desc);
-void ProcCompras(ifstream archArticulos,ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras);
+void ProcCompras(ifstream &archArticulos,ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras);
 void CrearTablaRubroArt(Articulo Articulos[], int nArticulos, RubroArt tablaRubroArt[], int &nRubroArt);
 void OrdxBur(RubroArt tabla[], int n);
 void IntCmb(RubroArt &a, RubroArt &b);
@@ -77,7 +77,7 @@ int main()
 
     Abrir(archArticulos, archIndDescripArt, archRubros, archListaCompras);
     VolcarArchivos(Articulos,IndDescripArt,Rubros,ListaCompras,nArticulos,nDescripArt,nRubros,nListaCompras,archArticulos, archIndDescripArt, archRubros, archListaCompras);
-    ProcCompras(ListaCompras,IndDescripArt,Articulos, nArticulos, nDescripArt, nRubros, nListaCompras);
+    ProcCompras(archArticulos,ListaCompras,IndDescripArt,Articulos, nArticulos, nDescripArt, nRubros, nListaCompras);
     for (int i = 0; i < nListaCompras; i++)
     {
         cout << ListaCompras[i].descripcionArt << " " << ListaCompras[i].cantRequerida << endl;
@@ -148,7 +148,7 @@ void VolcarArchivos(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubro
     nListaCompras = i;
  }
 
-void ProcCompras(ifstream archArticulos,ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras) {
+void ProcCompras(ifstream &archArticulos,ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras) {
     for (int i = 0; i < nListaCompras; i++)
     {
         cout << "ProcCompras " << ListaCompras[i].descripcionArt << " " << ListaCompras[i].cantRequerida << endl;
