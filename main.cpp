@@ -4,9 +4,8 @@
 #include <direct.h>
 #include <cstring>
 #include <ctime>
-using namespace std;
-// template <typename Generico>
 
+using namespace std;
 
 typedef char str30[31];
 typedef char str10[11];
@@ -22,7 +21,7 @@ struct Articulo {
   str10 unidadMedida;
   short porcOfertas[14];
 };
- 
+
 struct DescripArt {
   str30 descripcionArt;
   int posicionArt;
@@ -37,7 +36,7 @@ struct Rubro {
 struct ListaCompras {
   str30 descripcionArt;
   short cantRequerida;
-};   
+};
 
 struct RubroArt {
     short codRubro;
@@ -47,20 +46,23 @@ struct RubroArt {
 
 void EmitirUnArray(int id[],int n);
 
-bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[],int &nArticulos, int &nDescripArt, int &nRubros, int &nListaCompras);
+bool Abrir(ifstream &archArticulos, ifstream &archIndDescripArt, ifstream &archRubros, ifstream &archListaCompras);
+void VolcarArchivos(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[],int &nArticulos, int &nDescripArt, int &nRubros, int &nListaCompras,ifstream &archArticulos, ifstream &archIndDescripArt, ifstream &archRubros, ifstream &archListaCompras);
 bool LeerArticulos(ifstream &arch, Articulo &articulo);
 bool LeerRubros(ifstream &arch, Rubro &rubro);
 bool LeerListaCompras(ifstream &arch, ListaCompras &compra);
 bool LeerDescripArts(ifstream &arch, DescripArt &desc);
-void ProcCompras(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras);
+void ProcCompras(ifstream archArticulos,ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras);
 void CrearTablaRubroArt(Articulo Articulos[], int nArticulos, RubroArt tablaRubroArt[], int &nRubroArt);
 void OrdxBur(RubroArt tabla[], int n);
 void IntCmb(RubroArt &a, RubroArt &b);
 long GetTime(int &hh, int &mm, int &ss);
 long GetDate(int &year, int &mes, int &dia, int &ds);
 void EmitirTicket(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nListaCompras, int nDescripArt);
-int main()   
-{   
+
+int main()
+{
+    ifstream archArticulos, archIndDescripArt, archRubros, archListaCompras;
     Articulo Articulos[10000];
     DescripArt IndDescripArt[10000];
     Rubro Rubros[1000];
@@ -71,18 +73,15 @@ int main()
     int nRubros = 0;
     int nListaCompras = 0;
     int nRubroArt = 0;
-      
-    Abrir (Articulos,IndDescripArt,Rubros,ListaCompras,nArticulos,nDescripArt,nRubros,nListaCompras);
-    CrearTablaRubroArt(Articulos, nArticulos, tablaRubroArt, nRubroArt);
 
 
-    //   VolcarArchivos(/*lista de parámetros que correspondan*/); // indicados por el grupo de trabajo.
-    ProcCompras(ListaCompras,IndDescripArt,Articulos, nArticulos, nDescripArt, nRubros, nListaCompras);  
+    Abrir(archArticulos, archIndDescripArt, archRubros, archListaCompras);
+    VolcarArchivos(Articulos,IndDescripArt,Rubros,ListaCompras,nArticulos,nDescripArt,nRubros,nListaCompras,archArticulos, archIndDescripArt, archRubros, archListaCompras);
+    ProcCompras(ListaCompras,IndDescripArt,Articulos, nArticulos, nDescripArt, nRubros, nListaCompras);
     for (int i = 0; i < nListaCompras; i++)
     {
         cout << ListaCompras[i].descripcionArt << " " << ListaCompras[i].cantRequerida << endl;
     }
-                 
     EmitirTicket(ListaCompras,IndDescripArt,Articulos,nListaCompras,nDescripArt);
     //   EmitirArt_x_Rubro(/*lista de parámetros que correspondan*/);
     //   Cerrar (/*Articulos,IndDescripArt,Rubros,ListaCompras*/);
@@ -98,11 +97,11 @@ void EmitirUnArray(int id[], int n) {
 
 
 
-bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[], int &nArticulos, int &nDescripArt, int &nRubros, int &nListaCompras) {
-    ifstream archArticulos("../Articulos.txt");
-    ifstream archIndDescripArt("../IndDescripArt.txt");
-    ifstream archRubros("../Rubros.txt");
-    ifstream archListaCompras("../ListaCompras.txt");
+bool Abrir(ifstream &archArticulos, ifstream &archIndDescripArt, ifstream &archRubros, ifstream &archListaCompras) {
+    archArticulos.open("../Articulos.txt");
+    archIndDescripArt.open("../IndDescripArt.txt");
+    archRubros.open("./Rubros.txt");
+    archListaCompras.open("./ListaCompras.txt");
 
     if (!archArticulos) {
         cout << "Error al abrir el archivo Articulos.txt.";
@@ -115,12 +114,17 @@ bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], List
     if (!archRubros) {
         cout << "Error al abrir rubros.";
         return false;
-    }   
+    }
     if (!archListaCompras) {
         cout << "Error al abrir ListaCompras.txt.";
         return false;
     }
-    
+
+    return true;
+
+}
+
+void VolcarArchivos(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[], int &nArticulos, int &nDescripArt, int &nRubros, int &nListaCompras,ifstream &archArticulos, ifstream &archIndDescripArt, ifstream &archRubros, ifstream &archListaCompras) {
     int i = 0;
     while (LeerArticulos(archArticulos, Articulo[i])) {
 
@@ -142,22 +146,13 @@ bool Abrir(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], List
         i++;
     }
     nListaCompras = i;
-    for (int i = 0; i < nListaCompras; i++)
-    {
-        cout <<"leer archivo "<< ListaCompras[i].descripcionArt << " " << ListaCompras[i].cantRequerida << endl;
-    }
-    return true;
-}
-
-void VolcarArchivos(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubros[], ListaCompras ListaCompras[]) {
-    
  }
 
- void ProcCompras(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras) {
+void ProcCompras(ifstream archArticulos,ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nArticulos, int nDescripArt, int nRubros, int nListaCompras) {
     for (int i = 0; i < nListaCompras; i++)
     {
         cout << "ProcCompras " << ListaCompras[i].descripcionArt << " " << ListaCompras[i].cantRequerida << endl;
-    } 
+    }
     for (int i = 0; i < nListaCompras; i++)
      {
       int j = 0;
@@ -168,29 +163,28 @@ void VolcarArchivos(Articulo Articulo[] ,DescripArt IndDescripArt[], Rubro Rubro
         int stockViejo = Articulos[IndDescripArt[j].posicionArt].stockActual;
         if (Articulos[IndDescripArt[j].posicionArt].stockActual >= ListaCompras[i].cantRequerida) {
             Articulos[IndDescripArt[j].posicionArt].stockActual -= ListaCompras[i].cantRequerida;
-        } 
+        }
         else {
             ListaCompras[i].cantRequerida = Articulos[IndDescripArt[j].posicionArt].stockActual;
             Articulos[IndDescripArt[j].posicionArt].stockActual = 0;
         }
-        ifstream archivoEntrada("Articulos.txt");
-        ofstream archivoTemporal("Temporal.txt");
-        if (!archivoEntrada || !archivoTemporal) {
+        archArticulos.seekg(0);
+        if (!archArticulos) {
             cout << "No se pudo abrir el archivo.\n";
         }
         string linea;
-        while (getline(archivoEntrada, linea)) {
-        
+        while (getline(archArticulos, linea)) {
+
         if (linea.find(Articulos[IndDescripArt[j].posicionArt].codArt) != string::npos) {
             linea.replace(linea.find(to_string(stockViejo)),to_string(stockViejo).length() , to_string(Articulos[IndDescripArt[j].posicionArt].stockActual));
         }
     }
-      } 
+      }
       else {
         ListaCompras[i].cantRequerida = 0;
       }
      }
-     
+
  }
 
 // void EmitirTicket(/* lista de parámetros que correspondan */) {
@@ -209,17 +203,17 @@ bool LeerArticulos(ifstream &arch, Articulo &articulo) {
  if (!(arch >> articulo.codArt >> articulo.codRubro))
         return false;
 
-    arch.ignore(); 
-    arch.get(articulo.descripcionArt, 31); 
+    arch.ignore();
+    arch.get(articulo.descripcionArt, 31);
     arch >> articulo.stockActual >> articulo.precioUnitario;
     arch.ignore();
-    arch.get(articulo.unidadMedida, 11); 
+    arch.get(articulo.unidadMedida, 11);
 
     for (int i = 0; i < 14; i++) {
         arch >> articulo.porcOfertas[i];
     }
 
-    arch.ignore(1000, '\n'); 
+    arch.ignore(1000, '\n');
     return true;
 }
 
@@ -227,27 +221,27 @@ bool LeerRubros(ifstream &arch, Rubro &rubro) {
     if (!(arch >> rubro.codRubro))
         return false;
 
-    arch.ignore(); 
-    arch.get(rubro.descripcionRubro, 21); 
-    arch.ignore(1000, '\n'); 
+    arch.ignore();
+    arch.get(rubro.descripcionRubro, 21);
+    arch.ignore(1000, '\n');
     return true;
 }
 
 
 bool LeerListaCompras(ifstream &arch, ListaCompras &compra) {
-    if (!arch.get(compra.descripcionArt, 31)) 
+    if (!arch.get(compra.descripcionArt, 31))
         return false;
 
-    arch >> compra.cantRequerida; 
+    arch >> compra.cantRequerida;
     arch.ignore(1000, '\n');
     return true;
 }
 
 bool LeerDescripArts(ifstream &arch, DescripArt &desc) {
-    if (!arch.get(desc.descripcionArt, 31)) 
+    if (!arch.get(desc.descripcionArt, 31))
         return false;
 
-    arch >> desc.posicionArt >> desc.estado; 
+    arch >> desc.posicionArt >> desc.estado;
     arch.ignore(1000, '\n');
     return true;
 }
@@ -278,7 +272,7 @@ void IntCmb(RubroArt &a, RubroArt &b) {
 }
 
 void EmitirTicket(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Articulo Articulos[], int nListaCompras, int nDescripArt) {
-    
+
     freopen("../Ticket.txt", "w", stdout); // Redirige cout al archivo
 
     cout << "K O T T O\nYo te reconozco\nSUC 170\nXXXXXXXXX 9999\nC.U.I.T. 99-99999999-9\n";
@@ -361,7 +355,7 @@ void EmitirTicket(ListaCompras ListaCompras[], DescripArt IndDescripArt[], Artic
 
 // }
 // int BusBinVec(tbl id, tid clv, tid ult){
-  
+
 // }
 // string Replicate(char car, unsigned n){
 
